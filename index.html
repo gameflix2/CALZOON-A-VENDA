@@ -3,55 +3,315 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ACELERADOR VIP - GAMEFLIX</title>
+    <title>Repasse de Franquia Calzoon - Canguçu/RS</title>
+    <meta name="description" content="Oportunidade única: Repasse de franquia Calzoon em Canguçu/RS. Negócio pronto para faturar com marca consolidada.">
+    
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+    
     <style>
-        body { background-color: #000; color: white; font-family: 'Inter', sans-serif; }
-        .hard-box { border: 2px solid #E50914; background: linear-gradient(180deg, #1a0000 0%, #000 100%); }
-        .blink { animation: blinker 1s linear infinite; }
-        @keyframes blinker { 50% { opacity: 0; } }
+        :root {
+            --brand-red: #E50914; /* Mantido o tom de destaque da Gameflix */
+            --brand-yellow: #FFD700;
+            --brand-black: #141414;
+            --brand-dark: #000000;
+            --brand-text: #e5e5e5;
+            
+            --carousel-height: 120px;
+        }
+
+        * { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000000;
+            color: var(--brand-text);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .font-gamer {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 1px;
+            line-height: 1.1;
+        }
+
+        /* Estilo Botão Neon Adaptado */
+        .btn-action {
+            background: var(--brand-red);
+            color: white;
+            font-weight: 700;
+            padding: 1.2rem 2.5rem;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(229, 9, 20, 0.3);
+        }
+        .btn-action:hover {
+            background: #3ef406; /* Cor de destaque positiva no hover */
+            transform: scale(1.05);
+            color: #000;
+        }
+
+        .glass-card {
+            background: #181818;
+            border: 1px solid #2F2F2F;
+            border-radius: 12px;
+            padding: 2rem;
+            transition: border-color 0.3s ease;
+        }
+        .glass-card:hover { border-color: var(--brand-yellow); }
+
+        .price-highlight {
+            color: var(--brand-yellow);
+            font-size: 5rem;
+            font-weight: 900;
+            font-family: 'Bebas Neue', sans-serif;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+        }
+
+        .badge-exclusive {
+            background: var(--brand-yellow);
+            color: #000;
+            padding: 6px 16px;
+            font-weight: 900;
+            border-radius: 2px;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        /* Simulação de Galeria/Carrossel de fotos da loja */
+        #photo-strip {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            height: var(--carousel-height);
+            z-index: 100;
+            overflow: hidden;
+            background: #000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid var(--brand-red);
+        }
+        .placeholder-img {
+            width: 180px; height: 100px;
+            background: #222;
+            flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.7rem; color: #555; border-radius: 4px;
+        }
+
+        #page-offset { height: var(--carousel-height); }
+
+        .vagas-bar-wrap {
+            background: #1a1a1a;
+            border-radius: 99px; height: 8px; width: 100%;
+            overflow: hidden; margin-top: 8px;
+        }
+        .vagas-bar-fill {
+            height: 100%; background: var(--brand-yellow);
+            width: 95%;
+        }
+
+        /* FAQ */
+        .faq-item { border-bottom: 1px solid #2f2f2f; }
+        .faq-question {
+            width: 100%; text-align: left; padding: 1.5rem 0;
+            font-weight: 600; display: flex; justify-content: space-between;
+        }
+        .faq-answer { color: #aaa; max-height: 0; overflow: hidden; transition: 0.3s ease; }
+        .faq-item.open .faq-answer { max-height: 200px; padding-bottom: 1.5rem; }
+
+        #sticky-cta {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            z-index: 200; background: rgba(0,0,0,0.95);
+            border-top: 2px solid var(--brand-yellow);
+            padding: 1rem; display: flex; align-items: center; justify-content: center;
+            transform: translateY(100%); transition: 0.4s;
+        }
+        #sticky-cta.visible { transform: translateY(0); }
     </style>
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen p-4">
+<body>
 
-    <div class="w-full max-w-lg text-center mb-8">
-        <h2 class="text-3xl md:text-4xl font-black text-[#E50914] tracking-tighter italic blink mb-2">
-            OFERTA ÚNICA!
-        </h2>
-        <p class="text-zinc-400 text-sm uppercase font-bold tracking-widest">
-            ADICIONE AO SEU PEDIDO POR APENAS: <span class="text-white">R$ 19,90</span>
-        </p>
+    <div id="photo-strip">
+        <div class="placeholder-img">FOTO FACHADA [https://www.abcdacomunicacao.com.br/wp-content/uploads/Nova-Loja-750x375.jpg]</div>
+        <div class="placeholder-img">FOTO INTERIOR [https://d9hhrg4mnvzow.cloudfront.net/www.amelhorfranquia.com.br/calzoon/1e71dbe6-sorriso-centro-1_107t07t07t07s000000000.jpg]</div>
+        <div class="placeholder-img">FOTO COZINHA [https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS32HQDtUCkJ8GYw4N2u6oO-I_dNm0meli0UQ&s]</div>
+        <div class="placeholder-img">FOTO BALCÃO [https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIcnFdu_j6VVP17iM2xw-6osajJum_PTrd5w&s]</div>
+        <div class="placeholder-img">FOTO ESTOQUE [https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUWPIZPE4rkW_a7ZGmyoCw8COFZL34XhwkrQ&s]</div>
+        <div class="placeholder-img">FOTO PRODUTO [https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRihkVP6CwWnD0FLjY0HTA4Yzakz_hpafqF6w&s]</div>
+        <div class="placeholder-img">FOTO EQUIPE [https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqms79hCdN0lEBb6_k-tsEjpbN14qEnSH-Eg&s]</div>
+        <div class="placeholder-img">FOTO FACHADA [https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcSnPSLriDN81GWoXHWmk1h_jqV2_ofzSCmw&s]</div>
     </div>
+    <div id="page-offset"></div>
 
-    <div class="w-full max-w-md hard-box p-8 rounded-3xl text-center shadow-[0_0_60px_rgba(229,9,20,0.3)]">
-        
-        <h3 class="text-xl font-black mb-4 uppercase italic tracking-tighter">TURBINE SEUS DOWNLOADS? 🚀</h3>
-        
-        <p class="text-zinc-400 text-sm mb-6 leading-relaxed">
-            Não espere dias para jogar. Libere o <strong>SERVIDOR CDN VIP</strong> e baixe seus jogos na velocidade máxima da sua internet, sem filas e sem quedas.
-        </p>
+    <main class="relative min-h-screen flex items-center justify-center pt-10 overflow-hidden">
+        <div class="container mx-auto px-4 z-20 text-center">
+            <span class="badge-exclusive">📍 OPORTUNIDADE EM CANGUÇU/RS</span>
+            <h1 class="text-6xl md:text-9xl mb-4 uppercase">REPASSE <span class="text-red-600">CALZOON</span></h1>
+            <p class="text-2xl md:text-3xl text-gray-300 max-w-3xl mx-auto mb-8 font-light">
+                Negócio <strong>100% pronto</strong> e em pleno funcionamento. Fature desde o primeiro dia.
+            </p>
 
-        <div class="bg-black/50 p-6 rounded-2xl border border-zinc-800 mb-8">
-            <p class="text-zinc-500 text-[10px] uppercase font-bold mb-1">Apenas taxa única de:</p>
-            <div class="flex justify-center items-center gap-2">
-                <span class="text-zinc-700 line-through text-lg">R$ 47</span>
-                <span class="text-5xl font-black text-white italic">R$ 19,90</span>
+            <div class="max-w-md mx-auto mb-10 bg-white/5 border border-yellow-600/30 rounded-xl p-6">
+                <div class="flex justify-between mb-2 text-sm">
+                    <span>Disponibilidade de Negociação</span>
+                    <span class="text-yellow-500 font-bold">ALTA</span>
+                </div>
+                <div class="vagas-bar-wrap">
+                    <div class="vagas-bar-fill"></div>
+                </div>
+                <p class="text-xs text-gray-500 mt-3 italic">Apenas 01 unidade disponível para repasse na região.</p>
             </div>
-            <p class="text-[10px] text-[#E50914] mt-2 font-black uppercase tracking-widest italic">Acesso Vitalício ao Acelerador</p>
+
+            <div class="flex flex-col items-center justify-center mb-10">
+                <span class="text-gray-400 text-xl uppercase tracking-widest">Valor de Investimento</span>
+                <span class="price-highlight">R$ 250.000</span>
+                <p class="text-gray-400 mt-2">Estrutura Completa + Marca + Localização</p>
+            </div>
+
+            <a href="https://wa.me/5553981106771" class="btn-action text-2xl w-full md:w-auto">
+                <i class="fab fa-whatsapp mr-3"></i> QUERO NEGOCIAR AGORA
+            </a>
+            
+            <p class="text-xs text-gray-500 mt-6 uppercase tracking-widest">
+                Confidencialidade Garantida · Suporte na Transição
+            </p>
         </div>
+    </main>
 
-        <a href="LINK_CHECKOUT_COM_ACELERADOR" class="block w-full bg-[#E50914] text-white font-black text-xl py-5 rounded-xl hover:scale-105 transition-all shadow-lg uppercase italic tracking-tighter">
-            SIM! QUERO VELOCIDADE MÁXIMA
-        </a>
+    <section class="bg-black border-t border-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-5xl text-center mb-16">POR QUE ESTE É UM NEGÓCIO SEGURO?</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-card">
+                    <div class="text-yellow-500 text-4xl mb-6"><i class="fas fa-check-circle"></i></div>
+                    <h3 class="text-2xl mb-4">MARCA CONSOLIDADA</h3>
+                    <p class="text-gray-400">Franquia reconhecida nacionalmente com processos testados e aprovados pelo mercado.</p>
+                </div>
+                <div class="glass-card">
+                    <div class="text-red-600 text-4xl mb-6"><i class="fas fa-map-marker-alt"></i></div>
+                    <h3 class="text-2xl mb-4">LOCALIZAÇÃO PREMIUM</h3>
+                    <p class="text-gray-400">Ponto estratégico em Canguçu com alto fluxo de pedestres e visibilidade máxima.</p>
+                </div>
+                <div class="glass-card">
+                    <div class="text-yellow-500 text-4xl mb-6"><i class="fas fa-tools"></i></div>
+                    <h3 class="text-2xl mb-4">ESTRUTURA COMPLETA</h3>
+                    <p class="text-gray-400">Equipamentos de ponta, mobiliário padrão da franquia e estoque organizado.</p>
+                </div>
+                <div class="glass-card">
+                    <div class="text-red-600 text-4xl mb-6"><i class="fas fa-chart-line"></i></div>
+                    <h3 class="text-2xl mb-4">PRONTO PARA FATURAR</h3>
+                    <p class="text-gray-400">Diferente de abrir do zero, aqui você já assume com equipe treinada e clientela ativa.</p>
+                </div>
+                <div class="glass-card">
+                    <div class="text-yellow-500 text-4xl mb-6"><i class="fas fa-percentage"></i></div>
+                    <h3 class="text-2xl mb-4">BAIXO CUSTO</h3>
+                    <p class="text-gray-400">Operação otimizada para garantir a melhor margem de lucro possível no setor de alimentação.</p>
+                </div>
+                <div class="glass-card">
+                    <div class="text-red-600 text-4xl mb-6"><i class="fas fa-hands-helping"></i></div>
+                    <h3 class="text-2xl mb-4">SUPORTE TOTAL</h3>
+                    <p class="text-gray-400">Acompanhamento completo durante o processo de transferência da titularidade.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <a href="LINK_CHECKOUT_SEM_ACELERADOR" class="block mt-6 text-zinc-600 text-[10px] uppercase font-bold hover:text-zinc-400 underline tracking-widest">
-            Não, prefiro baixar na velocidade lenta
+    <section class="bg-[#080808] py-24">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl mb-12">CONHEÇA A UNIDADE POR DENTRO</h2>
+            <div class="max-w-4xl mx-auto aspect-video bg-gray-900 border border-gray-800 rounded-2xl flex flex-col items-center justify-center">
+                <i class="fas fa-play-circle text-6xl text-red-600 mb-4"></i>
+                <p class="text-gray-500">[LINK DO VÍDEO DA LOJA EM ESPERA]</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-black border-t border-gray-900">
+        <div class="container mx-auto px-4 max-w-3xl">
+            <h2 class="text-5xl text-center mb-12">DÚVIDAS FREQUENTES</h2>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    POR QUE O REPASSE ESTÁ SENDO FEITO?
+                    <i class="fas fa-plus text-red-600"></i>
+                </button>
+                <div class="faq-answer">
+                    Informações sobre o motivo do repasse são compartilhadas de forma privada durante a reunião de apresentação, garantindo a transparência do negócio.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    O QUE ESTÁ INCLUSO NO VALOR DE R$ 250.000?
+                    <i class="fas fa-plus text-red-600"></i>
+                </button>
+                <div class="faq-answer">
+                    Está incluso o direito de uso do ponto, todos os equipamentos, mobiliário, estoque atual, treinamento da equipe e a transferência do contrato de franquia.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    PRECISO TER EXPERIÊNCIA NO RAMO?
+                    <i class="fas fa-plus text-red-600"></i>
+                </button>
+                <div class="faq-answer">
+                    Não necessariamente. A franqueadora oferece treinamento completo e manuais de operação, facilitando a gestão mesmo para novos empreendedores.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-gradient-to-t from-red-900/20 to-black text-center">
+        <div class="container mx-auto px-4">
+            <h2 class="text-6xl mb-6 uppercase">O PRÓXIMO DONO PODE SER VOCÊ</h2>
+            <p class="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
+                Não perca a chance de adquirir um negócio validado em uma das melhores franquias do Brasil.
+            </p>
+            <a href="https://wa.me/5553981106771" class="btn-action text-2xl">
+                ENVIAR MENSAGEM AGORA <i class="fas fa-arrow-right ml-3"></i>
+            </a>
+            <div class="mt-10 text-gray-600 text-sm italic">
+                Atenção: Oportunidade única para a cidade de Canguçu/RS.
+            </div>
+        </div>
+    </section>
+
+    <div id="sticky-cta">
+        <a href="https://wa.me/5553981106771" class="btn-action py-3 px-8 text-sm">
+            FALAR COM PROPRIETÁRIO <i class="fab fa-whatsapp ml-2"></i>
         </a>
     </div>
 
-    <p class="mt-10 text-zinc-800 text-[9px] font-bold uppercase tracking-[0.3em]">
-        UPGRADE PREMIUM • GAMEFLIX 2026 • SERVIDORES DEDICADOS
-    </p>
+    <footer class="py-10 border-t border-gray-900 text-center text-gray-600">
+        <p>&copy; 2026 Repasse Calzoon Canguçu. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function toggleFaq(btn) {
+            const item = btn.closest('.faq-item');
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
+        }
+
+        const stickyCta = document.getElementById('sticky-cta');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                stickyCta.classList.add('visible');
+            } else {
+                stickyCta.classList.remove('visible');
+            }
+        });
+    </script>
 
 </body>
 </html>
