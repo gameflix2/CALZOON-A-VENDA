@@ -1,317 +1,225 @@
+Aqui está o código completo e atualizado para o seu arquivo **GROK.html**. 
+
+Eu substituí a lista antiga de conversas pela lista exata da sua imagem[cite: 1, 2] e fiz pequenos ajustes no CSS para que as notificações verdes e os ícones de áudio fiquem idênticos ao print que você mandou.
+
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Repasse de Franquia Calzoon - Canguçu/RS</title>
-    <meta name="description" content="Oportunidade única: Repasse de franquia Calzoon em Canguçu/RS. Negócio pronto para faturar com marca consolidada.">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --brand-red: #E50914; /* Mantido o tom de destaque da Gameflix */
-            --brand-yellow: #FFD700;
-            --brand-black: #141414;
-            --brand-dark: #000000;
-            --brand-text: #e5e5e5;
-            
-            --carousel-height: 120px;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WhatsApp Clone</title>
+  <style>
+    :root {
+      --whatsapp-green: #25D366;
+      --whatsapp-dark: #075E54;
+      --bg-color: #111B21;
+      --chat-bg: #0B141A;
+      --msg-sent: #005C4B;
+      --msg-received: #202C33;
+    }
 
-        * { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #000000;
-            color: var(--brand-text);
-            overflow-x: hidden;
-        }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #000;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
 
-        h1, h2, h3, .font-gamer {
-            font-family: 'Bebas Neue', sans-serif;
-            letter-spacing: 1px;
-            line-height: 1.1;
-        }
+    .phone {
+      width: 380px;
+      height: 720px;
+      background: #000;
+      border: 12px solid #111;
+      border-radius: 50px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(0,0,0,0.8);
+      position: relative;
+    }
 
-        /* Estilo Botão Neon Adaptado */
-        .btn-action {
-            background: var(--brand-red);
-            color: white;
-            font-weight: 700;
-            padding: 1.2rem 2.5rem;
-            border-radius: 4px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            box-shadow: 0 4px 15px rgba(229, 9, 20, 0.3);
-        }
-        .btn-action:hover {
-            background: #3ef406; /* Cor de destaque positiva no hover */
-            transform: scale(1.05);
-            color: #000;
-        }
+    .whatsapp {
+      width: 100%;
+      height: 100%;
+      background: var(--bg-color);
+      display: flex;
+      flex-direction: column;
+    }
 
-        .glass-card {
-            background: #181818;
-            border: 1px solid #2F2F2F;
-            border-radius: 12px;
-            padding: 2rem;
-            transition: border-color 0.3s ease;
-        }
-        .glass-card:hover { border-color: var(--brand-yellow); }
+    .header {
+      background: var(--whatsapp-dark);
+      color: white;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 18px;
+    }
 
-        .price-highlight {
-            color: var(--brand-yellow);
-            font-size: 5rem;
-            font-weight: 900;
-            font-family: 'Bebas Neue', sans-serif;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
-        }
+    .tabs {
+      background: var(--whatsapp-dark);
+      display: flex;
+      color: #8a9ba5;
+      font-size: 14px;
+      border-bottom: 1px solid #1f2a32;
+    }
 
-        .badge-exclusive {
-            background: var(--brand-yellow);
-            color: #000;
-            padding: 6px 16px;
-            font-weight: 900;
-            border-radius: 2px;
-            display: inline-block;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-        }
+    .tab { flex: 1; text-align: center; padding: 12px; cursor: pointer; }
+    .tab.active { color: white; border-bottom: 3px solid var(--whatsapp-green); }
 
-        /* Simulação de Galeria/Carrossel de fotos da loja */
-        #photo-strip {
-            position: fixed;
-            top: 0; left: 0; width: 100%;
-            height: var(--carousel-height);
-            z-index: 100;
-            overflow: hidden;
-            background: #000;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 2px solid var(--brand-red);
-        }
-        .placeholder-img {
-            width: 180px; height: 100px;
-            background: #222;
-            flex-shrink: 0;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 0.7rem; color: #555; border-radius: 4px;
-        }
+    .chat-list { flex: 1; overflow-y: auto; background: var(--chat-bg); }
 
-        #page-offset { height: var(--carousel-height); }
+    .chat-item {
+      padding: 12px 16px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      border-bottom: 1px solid #1f2a32;
+      cursor: pointer;
+    }
 
-        .vagas-bar-wrap {
-            background: #1a1a1a;
-            border-radius: 99px; height: 8px; width: 100%;
-            overflow: hidden; margin-top: 8px;
-        }
-        .vagas-bar-fill {
-            height: 100%; background: var(--brand-yellow);
-            width: 95%;
-        }
+    .avatar { width: 52px; height: 52px; border-radius: 50%; background: #333; flex-shrink: 0; object-fit: cover; }
 
-        /* FAQ */
-        .faq-item { border-bottom: 1px solid #2f2f2f; }
-        .faq-question {
-            width: 100%; text-align: left; padding: 1.5rem 0;
-            font-weight: 600; display: flex; justify-content: space-between;
-        }
-        .faq-answer { color: #aaa; max-height: 0; overflow: hidden; transition: 0.3s ease; }
-        .faq-item.open .faq-answer { max-height: 200px; padding-bottom: 1.5rem; }
+    .chat-info { flex: 1; min-width: 0; }
+    .chat-name { color: white; font-weight: 500; margin-bottom: 2px; font-size: 16px; }
+    .last-message { color: #8696a0; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        #sticky-cta {
-            position: fixed; bottom: 0; left: 0; right: 0;
-            z-index: 200; background: rgba(0,0,0,0.95);
-            border-top: 2px solid var(--brand-yellow);
-            padding: 1rem; display: flex; align-items: center; justify-content: center;
-            transform: translateY(100%); transition: 0.4s;
-        }
-        #sticky-cta.visible { transform: translateY(0); }
-    </style>
+    .chat-meta { text-align: right; font-size: 12px; color: #8696a0; min-width: 65px; }
+    .unread {
+      background: var(--whatsapp-green);
+      color: #0b141a;
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 10px;
+      display: inline-block;
+      font-weight: bold;
+      margin-top: 4px;
+    }
+
+    .chat-screen { display: none; flex-direction: column; height: 100%; background: #0B141A; }
+    .chat-header { background: var(--whatsapp-dark); padding: 10px 16px; display: flex; align-items: center; gap: 12px; color: white; }
+    .chat-messages { flex: 1; padding: 20px 12px; overflow-y: auto; background-color: #0b141a; }
+
+    .message { max-width: 75%; margin-bottom: 12px; padding: 8px 12px; border-radius: 12px; font-size: 15px; position: relative; }
+    .message.sent { background: var(--msg-sent); align-self: flex-end; color: white; }
+    .message.received { background: var(--msg-received); align-self: flex-start; color: white; }
+
+    .input-bar { background: #1f2a32; padding: 8px 10px; display: flex; align-items: center; gap: 8px; }
+    .input-container { flex: 1; background: #2a3942; border-radius: 30px; padding: 8px 16px; }
+    input { background: none; border: none; outline: none; color: white; width: 100%; }
+
+    .bottom-nav { background: #1f2a32; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #2a3942; }
+    .nav-item { text-align: center; color: #8696a0; font-size: 12px; }
+    .nav-item.active { color: var(--whatsapp-green); }
+  </style>
 </head>
 <body>
 
-    <div id="photo-strip">
-        <div class="placeholder-img">FOTO FACHADA [https://www.abcdacomunicacao.com.br/wp-content/uploads/Nova-Loja-750x375.jpg]</div>
-        <div class="placeholder-img">FOTO INTERIOR [https://d9hhrg4mnvzow.cloudfront.net/www.amelhorfranquia.com.br/calzoon/1e71dbe6-sorriso-centro-1_107t07t07t07s000000000.jpg]</div>
-        <div class="placeholder-img">FOTO COZINHA [https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS32HQDtUCkJ8GYw4N2u6oO-I_dNm0meli0UQ&s]</div>
-        <div class="placeholder-img">FOTO BALCÃO [https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIcnFdu_j6VVP17iM2xw-6osajJum_PTrd5w&s]</div>
-        <div class="placeholder-img">FOTO ESTOQUE [https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUWPIZPE4rkW_a7ZGmyoCw8COFZL34XhwkrQ&s]</div>
-        <div class="placeholder-img">FOTO PRODUTO [https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRihkVP6CwWnD0FLjY0HTA4Yzakz_hpafqF6w&s]</div>
-        <div class="placeholder-img">FOTO EQUIPE [https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqms79hCdN0lEBb6_k-tsEjpbN14qEnSH-Eg&s]</div>
-        <div class="placeholder-img">FOTO FACHADA [https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcSnPSLriDN81GWoXHWmk1h_jqV2_ofzSCmw&s]</div>
-    </div>
-    <div id="page-offset"></div>
-
-    <main class="relative min-h-screen flex items-center justify-center pt-10 overflow-hidden">
-        <div class="container mx-auto px-4 z-20 text-center">
-            <span class="badge-exclusive">📍 OPORTUNIDADE EM CANGUÇU/RS</span>
-            <h1 class="text-6xl md:text-9xl mb-4 uppercase">REPASSE <span class="text-red-600">CALZOON</span></h1>
-            <p class="text-2xl md:text-3xl text-gray-300 max-w-3xl mx-auto mb-8 font-light">
-                Negócio <strong>100% pronto</strong> e em pleno funcionamento. Fature desde o primeiro dia.
-            </p>
-
-            <div class="max-w-md mx-auto mb-10 bg-white/5 border border-yellow-600/30 rounded-xl p-6">
-                <div class="flex justify-between mb-2 text-sm">
-                    <span>Disponibilidade de Negociação</span>
-                    <span class="text-yellow-500 font-bold">ALTA</span>
-                </div>
-                <div class="vagas-bar-wrap">
-                    <div class="vagas-bar-fill"></div>
-                </div>
-                <p class="text-xs text-gray-500 mt-3 italic">Apenas 01 unidade disponível para repasse na região.</p>
-            </div>
-
-            <div class="flex flex-col items-center justify-center mb-10">
-                <span class="text-gray-400 text-xl uppercase tracking-widest">Valor de Investimento</span>
-                <span class="price-highlight">R$ 250.000</span>
-                <p class="text-gray-400 mt-2">Estrutura Completa + Marca + Localização</p>
-            </div>
-
-            <a href="https://wa.me/5553981106771" class="btn-action text-2xl w-full md:w-auto">
-                <i class="fab fa-whatsapp mr-3"></i> QUERO NEGOCIAR AGORA
-            </a>
-            
-            <p class="text-xs text-gray-500 mt-6 uppercase tracking-widest">
-                Confidencialidade Garantida · Suporte na Transição
-            </p>
-        </div>
-    </main>
-
-    <section class="bg-black border-t border-gray-900">
-        <div class="container mx-auto px-4">
-            <h2 class="text-5xl text-center mb-16">POR QUE ESTE É UM NEGÓCIO SEGURO?</h2>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="glass-card">
-                    <div class="text-yellow-500 text-4xl mb-6"><i class="fas fa-check-circle"></i></div>
-                    <h3 class="text-2xl mb-4">MARCA CONSOLIDADA</h3>
-                    <p class="text-gray-400">Franquia reconhecida nacionalmente com processos testados e aprovados pelo mercado.</p>
-                </div>
-                <div class="glass-card">
-                    <div class="text-red-600 text-4xl mb-6"><i class="fas fa-map-marker-alt"></i></div>
-                    <h3 class="text-2xl mb-4">LOCALIZAÇÃO PREMIUM</h3>
-                    <p class="text-gray-400">Ponto estratégico em Canguçu com alto fluxo de pedestres e visibilidade máxima.</p>
-                </div>
-                <div class="glass-card">
-                    <div class="text-yellow-500 text-4xl mb-6"><i class="fas fa-tools"></i></div>
-                    <h3 class="text-2xl mb-4">ESTRUTURA COMPLETA</h3>
-                    <p class="text-gray-400">Equipamentos de ponta, mobiliário padrão da franquia e estoque organizado.</p>
-                </div>
-                <div class="glass-card">
-                    <div class="text-red-600 text-4xl mb-6"><i class="fas fa-chart-line"></i></div>
-                    <h3 class="text-2xl mb-4">PRONTO PARA FATURAR</h3>
-                    <p class="text-gray-400">Diferente de abrir do zero, aqui você já assume com equipe treinada e clientela ativa.</p>
-                </div>
-                <div class="glass-card">
-                    <div class="text-yellow-500 text-4xl mb-6"><i class="fas fa-percentage"></i></div>
-                    <h3 class="text-2xl mb-4">BAIXO CUSTO</h3>
-                    <p class="text-gray-400">Operação otimizada para garantir a melhor margem de lucro possível no setor de alimentação.</p>
-                </div>
-                <div class="glass-card">
-                    <div class="text-red-600 text-4xl mb-6"><i class="fas fa-hands-helping"></i></div>
-                    <h3 class="text-2xl mb-4">SUPORTE TOTAL</h3>
-                    <p class="text-gray-400">Acompanhamento completo durante o processo de transferência da titularidade.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="bg-[#080808] py-24">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-4xl mb-12">CONHEÇA A UNIDADE POR DENTRO</h2>
-            <div class="max-w-4xl mx-auto aspect-video bg-gray-900 border border-gray-800 rounded-2xl flex flex-col items-center justify-center">
-                <i class="fas fa-play-circle text-6xl text-red-600 mb-4"></i>
-                <p class="text-gray-500">[LINK DO VÍDEO DA LOJA EM ESPERA]</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="bg-black border-t border-gray-900">
-        <div class="container mx-auto px-4 max-w-3xl">
-            <h2 class="text-5xl text-center mb-12">DÚVIDAS FREQUENTES</h2>
-
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    POR QUE O REPASSE ESTÁ SENDO FEITO?
-                    <i class="fas fa-plus text-red-600"></i>
-                </button>
-                <div class="faq-answer">
-                    Informações sobre o motivo do repasse são compartilhadas de forma privada durante a reunião de apresentação, garantindo a transparência do negócio.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    O QUE ESTÁ INCLUSO NO VALOR DE R$ 250.000?
-                    <i class="fas fa-plus text-red-600"></i>
-                </button>
-                <div class="faq-answer">
-                    Está incluso o direito de uso do ponto, todos os equipamentos, mobiliário, estoque atual, treinamento da equipe e a transferência do contrato de franquia.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    PRECISO TER EXPERIÊNCIA NO RAMO?
-                    <i class="fas fa-plus text-red-600"></i>
-                </button>
-                <div class="faq-answer">
-                    Não necessariamente. A franqueadora oferece treinamento completo e manuais de operação, facilitando a gestão mesmo para novos empreendedores.
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-24 bg-gradient-to-t from-red-900/20 to-black text-center">
-        <div class="container mx-auto px-4">
-            <h2 class="text-6xl mb-6 uppercase">O PRÓXIMO DONO PODE SER VOCÊ</h2>
-            <p class="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
-                Não perca a chance de adquirir um negócio validado em uma das melhores franquias do Brasil.
-            </p>
-            <a href="https://wa.me/5553981106771" class="btn-action text-2xl">
-                ENVIAR MENSAGEM AGORA <i class="fas fa-arrow-right ml-3"></i>
-            </a>
-            <div class="mt-10 text-gray-600 text-sm italic">
-                Atenção: Oportunidade única para a cidade de Canguçu/RS.
-            </div>
-        </div>
-    </section>
-
-    <div id="sticky-cta">
-        <a href="https://wa.me/5553981106771" class="btn-action py-3 px-8 text-sm">
-            FALAR COM PROPRIETÁRIO <i class="fab fa-whatsapp ml-2"></i>
-        </a>
+<div class="phone">
+  <div class="whatsapp">
+    <!-- Tela de Conversas -->
+    <div id="screen-chats" style="height: 100%; display: flex; flex-direction: column;">
+      <div class="header">
+        <strong>WhatsApp</strong>
+        <div style="display:flex; gap: 15px;">📷 🔍 ⋮</div>
+      </div>
+      <div class="tabs">
+        <div class="tab active">Conversas</div>
+        <div class="tab">Status</div>
+        <div class="tab">Chamadas</div>
+      </div>
+      <div class="chat-list" id="chat-list"></div>
+      <div class="bottom-nav">
+        <div class="nav-item active">💬<br>Conversas</div>
+        <div class="nav-item">🔄<br>Atualizações</div>
+        <div class="nav-item">👥<br>Comunidades</div>
+        <div class="nav-item">📞<br>Chamadas</div>
+      </div>
     </div>
 
-    <footer class="py-10 border-t border-gray-900 text-center text-gray-600">
-        <p>&copy; 2026 Repasse Calzoon Canguçu. Todos os direitos reservados.</p>
-    </footer>
+    <!-- Tela de Chat -->
+    <div id="screen-chat" class="chat-screen">
+      <div class="chat-header" onclick="backToChats()">
+        <span>←</span>
+        <img id="chat-avatar" class="avatar" style="width:35px; height:35px;">
+        <div style="flex:1"><div id="chat-name"></div><div style="font-size:11px; opacity:0.7;">online</div></div>
+        <span>⋮</span>
+      </div>
+      <div class="chat-messages" id="chat-messages" style="display:flex; flex-direction:column;"></div>
+      <div class="input-bar">
+        <div class="input-container"><input type="text" id="message-input" placeholder="Mensagem"></div>
+        <div style="background:var(--whatsapp-green); border-radius:50%; width:40px; height:40px; display:flex; align-items:center; justify-content:center;">➤</div>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <script>
-        function toggleFaq(btn) {
-            const item = btn.closest('.faq-item');
-            const isOpen = item.classList.contains('open');
-            document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
-            if (!isOpen) item.classList.add('open');
-        }
+<script>
+const chats = [
+  { id: 1, name: "Meta AI", lastMsg: "Não. Com esse código de site HTML não dá. O motivo técnico...", time: "sábado", unread: 0, avatar: "https://i.pravatar.cc/150?u=meta" },
+  { id: 2, name: "Amorzinho ❤️", lastMsg: "Reagiu com ❤️ a: \"Agora você vai ter uma folga até inventare...", time: "12:52", unread: 2, avatar: "https://i.pravatar.cc/150?u=amor" },
+  { id: 3, name: "Joh ❤️", lastMsg: "Eu tenho q entrar nisso todo dia", time: "12:45", unread: 50, avatar: "https://i.pravatar.cc/150?u=joh" },
+  { id: 4, name: "Filipe Cavalheiro Mano ❤️", lastMsg: "Vdd", time: "12:34", unread: 0, avatar: "https://i.pravatar.cc/150?u=filipe" },
+  { id: 5, name: "Diogo Lunera", lastMsg: "🎙️ 0:08", time: "12:20", unread: 0, avatar: "https://i.pravatar.cc/150?u=diogo" },
+  { id: 6, name: "🥷 Dionatan Cruz", lastMsg: "✓ ⏱️ Mensagem", time: "09:34", unread: 0, avatar: "https://i.pravatar.cc/150?u=dionatan" },
+  { id: 7, name: "CARLOS GERMI", lastMsg: "✓✓ Esse vídeo kkkk", time: "09:03", unread: 0, avatar: "https://i.pravatar.cc/150?u=carlos" },
+  { id: 8, name: "Dionatan Schulz", lastMsg: "✓✓ ahahahahahahhahahaha", time: "Ontem", unread: 0, avatar: "https://i.pravatar.cc/150?u=schulz" },
+  { id: 9, name: "+55 19 98993-6419", lastMsg: "✓✓ Feito irmão", time: "Ontem", unread: 0, avatar: "https://i.pravatar.cc/150?u=tel1" },
+  { id: 10, name: "Guilherme Knabach", lastMsg: "✓✓ Show", time: "Ontem", unread: 0, avatar: "https://i.pravatar.cc/150?u=guilherme" },
+  { id: 11, name: "Eu Antigo", lastMsg: "✓ https://gameflix2.github.io/CALZOON/", time: "Ontem", unread: 0, avatar: "https://i.pravatar.cc/150?u=antigo" },
+  { id: 12, name: "Morena ❤️", lastMsg: "✓✓ ta bom", time: "Ontem", unread: 0, avatar: "https://i.pravatar.cc/150?u=morena" },
+  { id: 13, name: "EVZÃO", lastMsg: "Ryan Mano ❤️: Aaata", time: "Ontem", unread: 18, avatar: "https://i.pravatar.cc/150?u=evzao" },
+  { id: 14, name: "William Ferreira de Avila", lastMsg: "✓✓ 📷 Figurinha", time: "Ontem", unread: 0, avatar: "https://i.pravatar.cc/150?u=william" },
+  { id: 15, name: "+55 81 9735-8635", lastMsg: "Top", time: "Ontem", unread: 3, avatar: "https://i.pravatar.cc/150?u=81" },
+  { id: 16, name: "Vento Sul", lastMsg: "🎙️ 0:07", time: "Ontem", unread: 3, avatar: "https://i.pravatar.cc/150?u=ventosul" },
+  { id: 17, name: "+55 53 3252-2056", lastMsg: "🚫 Mensagem apagada", time: "Ontem", unread: 0, avatar: "https://i.pravatar.cc/150?u=tel2" },
+  { id: 18, name: "Igor Teixeira 🍭", lastMsg: "✓✓ Me avisa", time: "terça-feira", unread: 0, avatar: "https://i.pravatar.cc/150?u=igor" },
+  { id: 19, name: "carine penning taubenhein1", lastMsg: "✓✓ Tá bem", time: "terça-feira", unread: 0, avatar: "https://i.pravatar.cc/150?u=carine" }
+];
 
-        const stickyCta = document.getElementById('sticky-cta');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 500) {
-                stickyCta.classList.add('visible');
-            } else {
-                stickyCta.classList.remove('visible');
-            }
-        });
-    </script>
+function renderChatList() {
+  const container = document.getElementById('chat-list');
+  container.innerHTML = '';
+  chats.forEach(chat => {
+    const div = document.createElement('div');
+    div.className = 'chat-item';
+    div.innerHTML = `
+      <img class="avatar" src="${chat.avatar}">
+      <div class="chat-info">
+        <div class="chat-name">${chat.name}</div>
+        <div class="last-message">${chat.lastMsg}</div>
+      </div>
+      <div class="chat-meta">
+        <div style="color: ${chat.unread > 0 ? '#25D366' : '#8696a0'}">${chat.time}</div>
+        ${chat.unread > 0 ? `<div class="unread">${chat.unread}</div>` : ''}
+      </div>
+    `;
+    div.onclick = () => openChat(chat);
+    container.appendChild(div);
+  });
+}
+
+function openChat(chat) {
+  document.getElementById('screen-chats').style.display = 'none';
+  document.getElementById('screen-chat').style.display = 'flex';
+  document.getElementById('chat-name').innerText = chat.name;
+  document.getElementById('chat-avatar').src = chat.avatar;
+  const msgBox = document.getElementById('chat-messages');
+  msgBox.innerHTML = `<div class="message received">${chat.lastMsg}</div>`;
+}
+
+function backToChats() {
+  document.getElementById('screen-chats').style.display = 'flex';
+  document.getElementById('screen-chat').style.display = 'none';
+}
+
+window.onload = renderChatList;
+</script>
 
 </body>
 </html>
+```
